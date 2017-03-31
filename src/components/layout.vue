@@ -47,9 +47,10 @@
                 flex: 1;
                 line-height: 50px;
                 .nav-list{
+                    float: right;
                     font-size: 18px;
                     li{
-                        float: right;
+                        float: left;
                         &.nav-pile{
                             padding: 0 15px;
                         }

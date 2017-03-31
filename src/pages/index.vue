@@ -16,7 +16,7 @@
                 </template>
             </div>
             <div class="index-left-block lastest-news">
-                <h2>最新消息</h2>
+                <h2 class="news">最新消息</h2>
                 <ul>
                     <li v-for="item in newsList">
                         <a :href="item.url" class="new-item">{{ item.title }}</a>
@@ -25,9 +25,10 @@
             </div>
         </div>
         <div class="index-right">
-            <!--<slide-show :slides="slides" :inv="invTime"></slide-show>-->
+            <slide :options="options"></slide>
             <div class="index-board-list">
-                <div class="index-board-item" v-for="(item, index) in boardList" :class="[{'line-last' : index % 2 !== 0}]">
+                <div class="index-board-item" v-for="(item, index) in boardList"
+                     :class="[{'line-last' : index % 2 !== 0}]">
                     <div class="index-board-item-inner" :class="['index-board-' + item.id]">
                         <h2>{{ item.title }}</h2>
                         <p>{{ item.description }}</p>
@@ -41,12 +42,38 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
+    import slide from '@/components/slide';
     export default {
-        created: function () {
-            //this.fetchData();
+        created () {
+            this.fetchData();
         },
         data(){
             return {
+                options: {
+                    slides: [
+                        {
+                            src: require('../assets/img/pic1.jpg'),
+                            title: '图片1',
+                            href: 'detail/analysis'
+                        },
+                        {
+                            src: require('../assets/img/pic2.jpg'),
+                            title: '图片2',
+                            href: 'detail/count'
+                        },
+                        {
+                            src: require('../assets/img/pic3.jpg'),
+                            title: '图片3',
+                            href: 'http://xxx.xxx.com'
+                        },
+                        {
+                            src: require('../assets/img/pic4.jpg'),
+                            title: '图片4',
+                            href: 'detail/forecast'
+                        }
+                    ],
+                    invTime: 2000
+                },
                 boardList: [
                     {
                         title: '开放产品',
@@ -129,19 +156,21 @@
         },
         methods: {
             fetchData () {
-                const _this = this;
                 const url = 'api/getNewsList';
-                this.$http.get(url).then(function (res) {
-                    _this.newsList = res.data.newsList
-                }).catch(function (err) {
+                this.$http.post(url).then((res) => {
+                    this.newsList = res.data;
+                }).catch((err) => {
                     console.log(err)
                 })
             }
         },
+        components: {
+            slide
+        }
     };
 </script>
 <style lang="less" type="text/css" rel="stylesheet/less" scoped>
-    .index-wrap{
+    .index-wrap {
         width: 100%;
         display: flex;
         .index-left {
@@ -151,7 +180,7 @@
                 background: #fff;
                 box-shadow: 0 0 1px #ddd;
                 &.lastest-news {
-                    min-height: 512px;
+                    max-height: 461px;
                 }
                 h2 {
                     background: #4fc08d;
@@ -167,18 +196,39 @@
                 .hr {
                     margin-bottom: 20px;
                 }
+                .news {
+                    margin-bottom: 5px;
+                }
                 ul {
                     padding: 10px 15px;
                     li {
                         padding: 5px;
+                        .new-item {
+                            display: block;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            width: 235px;
+                        }
+                    }
+                    .hot-tag {
+                        display: inline-block;
+                        font-size: 12px;
+                        height: 18px;
+                        line-height: 18px;
+                        font-weight: 300;
+                        background: #ff0000;
+                        color: #fff;
+                        padding: 0 5px;
                     }
                 }
             }
         }
         .index-right {
-            flex: 3 0 0 ;
+            flex: 3 0 0;
             margin-top: 15px;
             .index-board-list {
+                margin-top: 15px;
                 overflow: hidden;
                 .index-board-item {
                     float: left;
@@ -214,7 +264,7 @@
                         }
                         .index-board-button {
                             margin-top: 20px;
-                            .button{
+                            .button {
                                 background: #4fc08d;
                                 color: #fff;
                                 display: inline-block;
