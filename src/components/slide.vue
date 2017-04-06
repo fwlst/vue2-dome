@@ -10,10 +10,12 @@
                 </transition>
             </a>
         </div>
-        <div class="title">{{options.slides[nowIndex].title}}</div>
+        <div class="title">{{options.slides[0].title}}</div>
         <ul class="page-nub">
             <li @click="goToSlide(prevIndex)"><</li>
-            <li v-for="(slide,index) in options.slides" @click="goToSlide(index)" :class="{active: index === nowIndex}"> {{index + 1}}</li>
+            <li v-for="(slide,index) in options.slides" @click="goToSlide(index)" :class="{active: index === nowIndex}">
+                {{index + 1}}
+            </li>
             <li @click="goToSlide(nextIndex)">></li>
         </ul>
     </div>
@@ -21,12 +23,20 @@
 <script type="text/ecmascript-6">
     import Vue from 'vue'
     export default {
+        data() {
+            return {
+                nowIndex: 0,
+                isShow: true
+            }
+        },
         props: {
             options: {
                 type: Object,
-                default: {
-                    slides: [],
-                    invTime: 1000
+                default(){
+                    return {
+                        slides: [],
+                        invTime: 1000
+                    }
                 }
             }
         },
@@ -48,9 +58,18 @@
                 }
             }
         },
+        watch:{
+            /*
+            options(){
+                this.runInv();
+            }
+            */
+        },
         mounted() {
-            this.setAHeight();
-            this.runInv();
+            setTimeout(() => {
+                this.setSlideHeight();
+                this.runInv();
+            },20);
         },
         methods: {
             goToSlide(index){
@@ -68,19 +87,13 @@
             clearInv () {
                 clearInterval(this.invId)
             },
-            setAHeight(){
+            setSlideHeight(){
                 let slideImg = this.$refs.slideImg;
                 let slide = this.$refs.slide;
                 slideImg.onload = function () {
                     let imgHeight = slideImg.getBoundingClientRect().height + 'px';
                     slide.style.height = imgHeight;
                 };
-            }
-        },
-        data() {
-            return {
-                nowIndex: 0,
-                isShow: true
             }
         }
     };
@@ -91,8 +104,8 @@
         position: relative;
         overflow: hidden;
         color: #fff;
-        .slide-img{
-            img{
+        .slide-img {
+            img {
                 position: absolute;
                 display: block;
                 width: 100%;
