@@ -9,6 +9,13 @@ import axios from 'axios'
 import Layout from '@/components/layout';
 /* 首页组件 */
 import IndexPage from '@/pages/index'
+import DetailPage from '@/pages/detail'
+import OrderListPage from '@/pages/orderList'
+
+import DetailAnaPage from '@/pages/detail/analysis'
+import DetailCouPage from '@/pages/detail/count'
+import DetailForPage from '@/pages/detail/forecast'
+import DetailPubPage from '@/pages/detail/publish'
 
 /* reset import   全局引入重置样式 */
 import '@/assets/css/reset.css';
@@ -28,7 +35,7 @@ let router = new Router({
         {
             path: '/',
             component: IndexPage
-        }/*,
+        },
         {
             path: '/orderList',
             component: OrderListPage
@@ -55,7 +62,7 @@ let router = new Router({
                     component: DetailPubPage
                 }
             ]
-        }*/
+        }
     ]
 });
 
