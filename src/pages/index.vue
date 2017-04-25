@@ -44,31 +44,21 @@
 <script type="text/ecmascript-6">
     import slide from '@/components/slide';
     export default {
-        created () {
-            this.fetchData();
+        mounted () {
+            this.$store.dispatch('fatchIndexData');
         },
-        data(){
-            return {
-                options: {},
-                boardList: [],
-                newsList: [],
-                productList: {}
-            }
-        },
-        methods: {
-            fetchData () {
-                const url = 'api/getIndexData';
-                this.$http.post(url).then((res) => {
-                    this.newsList = res.data.newsList;
-                    this.boardList = res.data.boardList;
-                    this.productList = res.data.productList;
-                    //this.options = res.data.options;
-                    this.$set(this,'options',res.data.options);
-                    //console.log(this.$refs.indexSlide.options);
-                    //this.$refs.indexSlide.al();
-                }).catch((err) => {
-                    console.log(err)
-                })
+        computed:{
+            options(){
+                return this.$store.getters.getOptions
+            },
+            boardList(){
+                return this.$store.getters.getBoardList
+            },
+            newsList(){
+                return this.$store.getters.getNewsList
+            },
+            productList(){
+                return this.$store.getters.getProductList
             }
         },
         components: {

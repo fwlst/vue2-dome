@@ -101,40 +101,30 @@
                     }
                 ],
                 currentOrder: 'asc',
-                tableData: []
             }
         },
         watch: {
             query () {
-                this.getList()
+                this.$store.dispatch('fatchOrderList');
+            }
+        },
+        computed:{
+            tableData(){
+                return this.$store.getters.getOrderList
             }
         },
         methods: {
             productChange (obj) {
-                this.productId = obj.value
-                this.getList()
+                this.$store.commit('updateParams',{key:'productId', val:obj.value});
+                this.$store.dispatch('fatchOrderList');
             },
             getStartDate (date) {
-                this.startDate = date
-                this.getList()
+                this.$store.commit('updateParams',{key:'startDate', val:date});
+                this.$store.dispatch('fatchOrderList');
             },
             getEndDate (date) {
-                this.endDate = date
-                this.getList()
-            },
-            getList () {
-                let reqParams = {
-                    query: this.query,
-                    productId: this.productId,
-                    startDate: this.startDate,
-                    endDate: this.endDate
-                }
-                this.$http.post('/api/getOrderList', reqParams)
-                    .then((res) => {
-                        this.tableData = res.data.list
-                    }, (err) => {
-
-                    })
+                this.$store.commit('updateParams',{key:'endDate', val:date});
+                this.$store.dispatch('fatchOrderList');
             },
             changeOrderType (headItem) {
                 this.tableHeads.map((item) => {
@@ -148,11 +138,11 @@
                 else if (this.currentOrder === 'desc') {
                     this.currentOrder = 'asc'
                 }
-                this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder)
+                this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder);
             }
         },
         mounted () {
-            this.getList()
+            this.$store.dispatch('fatchOrderList');
         }
     }
 </script>

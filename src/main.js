@@ -20,6 +20,10 @@ import DetailPubPage from '@/pages/detail/publish'
 /* reset import   全局引入重置样式 */
 import '@/assets/css/reset.css';
 
+/*引入 store*/
+import store from '@/store'
+
+
 /* 注册路由组件 */
 Vue.use(Router);
 
@@ -71,6 +75,7 @@ let router = new Router({
 new Vue({
     el: '#app',
     router,
+    store,
     template: '<Layout/>',
     components: {Layout}
 });
