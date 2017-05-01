@@ -19,7 +19,7 @@
                 {
                     "src": "/static/img/pic3.jpg",
                     "title": "图片3",
-                    "href": "http://xxx.xxx.com"
+                    "href": "/detail/publish"
                 },
                 {
                     "src": "/static/img/pic4.jpg",
@@ -63,22 +63,22 @@
             {
                 "id": 1,
                 "title": "新闻条目1新闻条目1新闻条目1新闻条目1",
-                "url": "http://starcraft.com"
+                "url": "detail/analysis"
             },
             {
                 "id": 2,
                 "title": "新闻条目2新闻条目2新闻条目2新闻条目2",
-                "url": "http://warcraft.com"
+                "url": "detail/count"
             },
             {
                 "id": 3,
                 "title": "新闻条3新闻条3新闻条3",
-                "url": "http://overwatch.com"
+                "url": "/detail/publish"
             },
             {
                 "id": 4,
                 "title": "新闻条4广告发布",
-                "url": "http://hearstone.com"
+                "url": "detail/forecast"
             }
         ],
         "productList": {
@@ -87,20 +87,20 @@
                 "list": [
                     {
                         "name": "数据统计",
-                        "url": "http://starcraft.com"
+                        "url": "/detail/count"
                     },
                     {
                         "name": "数据预测",
-                        "url": "http://warcraft.com"
+                        "url": "/detail/forecast"
                     },
                     {
                         "name": "流量分析",
-                        "url": "http://overwatch.com",
+                        "url": "/detail/analysis",
                         "hot": true
                     },
                     {
                         "name": "广告发布",
-                        "url": "http://hearstone.com"
+                        "url": "/detail/publish"
                     }
                 ]
             },
@@ -110,20 +110,20 @@
                 "list": [
                     {
                         "name": "91助手",
-                        "url": "http://weixin.com"
+                        "url": "http://tg.xyzs.com/dt/pc.php?ref=baidu&wid=10"
                     },
                     {
                         "name": "产品助手",
-                        "url": "http://twitter.com",
+                        "url": "http://tg.xyzs.com/dt/pc.php?ref=baidu&wid=10",
                         "hot": true
                     },
                     {
                         "name": "智能地图",
-                        "url": "http://maps.com"
+                        "url": "http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D91%E5%8A%A9%E6%89%8B"
                     },
                     {
                         "name": "团队语音",
-                        "url": "http://phone.com"
+                        "url": "https://cloud.baidu.com/product/speech.html?track=cp:nsem|pf:pc|pp:speech|pu:speech|ci:|kw:63124"
                     }
                 ]
             }
